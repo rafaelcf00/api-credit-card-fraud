@@ -1,0 +1,6 @@
+.venv
+.env
+
+#alembic
+/alembic
+/alembic.ini
