@@ -4,3 +4,9 @@
 #alembic
 /alembic
 /alembic.ini
+
+#vscode
+.vscode
+
+#cache
+__pycache__
