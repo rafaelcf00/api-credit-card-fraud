@@ -11,3 +11,12 @@ class UserType(BaseModel):
     name: str
     email: str
     password_hash: str
+
+class UserUpdateType(BaseModel):
+    '''
+        Model Update User
+    '''
+
+    name: str
+    email: str
+    password_hash: str

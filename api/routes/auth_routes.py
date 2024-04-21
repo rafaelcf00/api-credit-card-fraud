@@ -23,7 +23,6 @@ async def register_user(data: UserType, model: Session = Depends(get_db)):
                 model.add(user)
                 model.commit()
                 model.refresh(user)
-                
                 return {'message': 'Register success'}
     except Exception as error:
         raise HTTPException(status_code=500, detail=str(error))
