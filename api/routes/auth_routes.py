@@ -13,14 +13,18 @@ router = APIRouter(tags=['Auth'])
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 @router.post('/auth/register', status_code=200)
-async def register_user(data: UserType) -> UserType:
+async def register_user(data: UserType, model: Session = Depends(get_db)):
     try:
         if data:
             data.password_hash = pwd_context.hash(data.password_hash)
             user = Users(**data.__dict__)
 
             if user:
-                return user
+                model.add(user)
+                model.commit()
+                model.refresh(user)
+                
+                return {'message': 'Register success'}
     except Exception as error:
         raise HTTPException(status_code=500, detail=str(error))
     
