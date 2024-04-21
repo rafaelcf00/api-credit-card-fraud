@@ -52,7 +52,7 @@ Descrição das variáveis de ambiente a serem configuradas no projeto.
 |DATABASE_HOST    |`string`|             |Host do banco local ou em nuvem    |
 |DATABASE_NAME    |`string`|postgres     |Username do banco                  |
 |DATABASE_PASSWORD|`string`|             |Password do banco                  |
-|DATABASE_DB_NAME |`string`|arduino      |Nome do banco                      |
+|DATABASE_DB_NAME |`string`|             |Nome do banco                      |
 |DATABASE_PORT    |`string`|5432         |Porta a ser usada pelo postgres    |
 |DATABASE_UPGRADE |`string`|False        |Atualiza o banco ao reiniciar      |
 |SECRET_KEY       |`string`|             |String aleatória para criar o token|
