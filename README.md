@@ -1,5 +1,5 @@
 # api-credit-card-fraud
-#### Api analise e cadastro de pH e temperatura de amostrar liquidas em laboratório.
+#### Api adminstrativa e pré-processamento do dataset Credit Card Fraud.
 
 ## Recriando o banco
 Para reacriar o banco é necessario o postgres de forma local ou em nuvem. Criar tabela com nome padrão `api_credit_card_fraud`.
