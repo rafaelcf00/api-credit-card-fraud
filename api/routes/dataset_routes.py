@@ -5,7 +5,7 @@ from api.common.convert_csv_json import convert_to_json
 router = APIRouter(tags=['Dataset'])
 
 directory = 'dataset/'
-filename = 'fraud_dataset.csv'
+filename = 'new_fraud_dataset.csv'
 
 @router.get('/{filename}', status_code=200)
 async def export_json():
