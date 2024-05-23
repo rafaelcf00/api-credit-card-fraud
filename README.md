@@ -28,7 +28,7 @@ target_metadata = Base.metadata
 
 Feito isso rode o comando para a `migration`:
 ```
-alembic revision --autogenerate -m 'create table user'
+alembic revision --autogenerate -m 'create tables'
 ```
 ```
 alembic upgrade head
