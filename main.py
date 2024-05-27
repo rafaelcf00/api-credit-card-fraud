@@ -28,7 +28,8 @@ async def lifespan(app_: FastAPI):
 #cors aplication
 origins = [
     '*',
-    'http://127.0.0.1:8000'
+    'http://127.0.0.1:8888',
+    'https://colab.research.google.com/'
 ]
 
 app.add_middleware(
