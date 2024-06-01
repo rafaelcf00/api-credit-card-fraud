@@ -1,3 +1,4 @@
+from typing import List
 from pydantic import BaseModel
 
 class InputMobileType(BaseModel):
@@ -6,10 +7,13 @@ class InputMobileType(BaseModel):
     gender: str
     city: str
     state: str
-    iat: int
-    long: int
+    lat: float
+    long: float
     city_pop: str
     job: str
     unix_time: int
-    merch_iat: int
-    merch_long: int
+    merch_lat: float
+    merch_long: float
+
+class ResponseDatasetType(BaseModel):
+    is_fraud: List[int]

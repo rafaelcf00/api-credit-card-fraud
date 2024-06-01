@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from api.common.convert_csv_json import convert_to_json
 from api.models.dependencies import get_db
 from api.models.inputs_model import Inputs
-from api.types.input import InputMobileType
+from api.types.input import InputMobileType, ResponseDatasetType
 
 router = APIRouter(tags=['Dataset'])
 
@@ -44,6 +44,7 @@ async def insert_in_dataset(data: InputMobileType, db: Session = Depends(get_db)
 async def find_input(db: Session = Depends(get_db)) -> InputMobileType:
     try:
         inputs = db.query(Inputs).all()
+        print(inputs)
         if len(inputs) != 0:
             return inputs
         else:
@@ -60,5 +61,13 @@ async def get_input(id: int, db: Session = Depends(get_db)) -> InputMobileType:
             return input
         else:
             raise HTTPException(status_code=404, detail='Input not found.')
+    except Exception as error:
+        HTTPException(status_code=500, detail=str(error))
+
+@router.post('/response-dataset', status_code=201)
+async def return_response(data: ResponseDatasetType, Session = Depends(get_db)) -> ResponseDatasetType:
+    try:
+        if data:
+            return data
     except Exception as error:
         HTTPException(status_code=500, detail=str(error))
