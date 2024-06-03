@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, Date, String, Float
 from api.models.database import Base
+from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, Date, String, Float
 
 
 class Inputs(Base):
@@ -18,3 +19,6 @@ class Inputs(Base):
     unix_time = Column(Integer, nullable=False)
     merch_lat = Column(Float, nullable=False)
     merch_long = Column(Float, nullable=False)
+
+    # relations
+    frauds = relationship('Frauds', back_populates='inputs')

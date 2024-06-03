@@ -14,6 +14,3 @@ class InputMobileType(BaseModel):
     unix_time: int
     merch_lat: float
     merch_long: float
-
-class ResponseDatasetType(BaseModel):
-    is_fraud: List[int]
