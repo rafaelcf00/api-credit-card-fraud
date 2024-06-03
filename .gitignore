@@ -1,9 +1,5 @@
 .venv
 .env
 
-#alembic
-/alembic
-/alembic.ini
-
 #cache
 __pycache__
