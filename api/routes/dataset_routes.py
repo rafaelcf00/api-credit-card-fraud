@@ -7,12 +7,13 @@ from api.models.dependencies import get_db
 from api.models.inputs_model import Inputs
 from api.types.input import InputMobileType
 
-router = APIRouter(tags=['Dataset'])
+router = APIRouter(tags=["Dataset"])
 
-directory = 'dataset/'
-filename = 'new_fraud_dataset.csv'
+directory = "dataset/"
+filename = "new_fraud_dataset.csv"
 
-@router.get('/{filename}', status_code=200)
+
+@router.get("/{filename}", status_code=200)
 async def export_json():
     csv_path = os.path.join(directory, filename)
     try:
@@ -20,13 +21,15 @@ async def export_json():
             json_dataset = convert_to_json(csv_path)
             return json_dataset
         else:
-            raise HTTPException(status_code=404, detail='File not found.')
+            raise HTTPException(status_code=404, detail="File not found.")
     except Exception as error:
         HTTPException(status_code=500, detail=str(error))
 
 
-@router.post('/input', status_code=201)
-async def insert_in_dataset(data: InputMobileType, db: Session = Depends(get_db)) -> InputMobileType:
+@router.post("/input", status_code=201)
+async def insert_in_dataset(
+    data: InputMobileType, db: Session = Depends(get_db)
+) -> InputMobileType:
     try:
         if data:
             insert = Inputs(**data.__dict__)
@@ -40,25 +43,28 @@ async def insert_in_dataset(data: InputMobileType, db: Session = Depends(get_db)
     except Exception as error:
         HTTPException(status_code=500, detail=str(error))
 
-@router.get('/input', response_model=List[InputMobileType], status_code=200)
-async def find_input(db: Session = Depends(get_db)) -> InputMobileType:
-    try:
-        inputs = db.query(Inputs).all()
-        if len(inputs) != 0:
-            return inputs
-        else:
-            raise HTTPException(status_code=404, detail='Input not found.')
-    except Exception as error:
-        HTTPException(status_code=500, detail=str(error))
 
-@router.get('/input/{id}', response_model=InputMobileType, status_code=200)
+@router.get("/input", response_model=List[InputMobileType], status_code=200)
+async def find_input(db: Session = Depends(get_db)) -> List[InputMobileType]:
+    try:
+        with db:
+            inputs = db.query(Inputs).all()
+            if inputs:
+                return inputs
+            else:
+                raise HTTPException(status_code=404, detail="Input not found.")
+    except Exception as error:
+        raise HTTPException(status_code=500, detail=str(error))
+
+
+@router.get("/input/{id}", response_model=InputMobileType, status_code=200)
 async def get_input(id: int, db: Session = Depends(get_db)) -> InputMobileType:
     try:
-        input = db.query(Inputs).filter_by(id= id).first()
+        input = db.query(Inputs).filter_by(id=id).first()
 
         if input:
             return input
         else:
-            raise HTTPException(status_code=404, detail='Input not found.')
+            raise HTTPException(status_code=404, detail="Input not found.")
     except Exception as error:
         HTTPException(status_code=500, detail=str(error))
