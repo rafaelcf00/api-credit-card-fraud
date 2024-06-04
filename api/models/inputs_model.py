@@ -14,7 +14,7 @@ class Inputs(Base):
     state = Column(String, nullable=False)
     lat = Column(Float, nullable=False)
     long = Column(Float, nullable=False)
-    city_pop = Column(String, nullable=False)
+    city_pop = Column(Float, nullable=False)
     job = Column(String, nullable=False)
     unix_time = Column(Integer, nullable=False)
     merch_lat = Column(Float, nullable=False)
