@@ -1,8 +1,8 @@
-"""crate tables
+"""updatess
 
-Revision ID: ed417a368c0b
+Revision ID: f9087360f962
 Revises: 
-Create Date: 2024-06-02 19:26:36.911199
+Create Date: 2024-06-04 20:34:38.577816
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'ed417a368c0b'
+revision: str = 'f9087360f962'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -29,7 +29,7 @@ def upgrade() -> None:
     sa.Column('state', sa.String(), nullable=False),
     sa.Column('lat', sa.Float(), nullable=False),
     sa.Column('long', sa.Float(), nullable=False),
-    sa.Column('city_pop', sa.String(), nullable=False),
+    sa.Column('city_pop', sa.Float(), nullable=False),
     sa.Column('job', sa.String(), nullable=False),
     sa.Column('unix_time', sa.Integer(), nullable=False),
     sa.Column('merch_lat', sa.Float(), nullable=False),
