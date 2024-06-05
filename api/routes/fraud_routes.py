@@ -13,21 +13,19 @@ router = APIRouter(tags=["Fraud"])
 async def insert_reponse_input(
     data: ResponseDatasetType, db: Session = Depends(get_db)
 ) -> ResponseDatasetType:
-    try:
-        if data:
-            input = db.query(Inputs).filter_by(id=data.input_id).first()
-            if not input:
-                is_fraud = Frauds(**data.__dict__)
-                if is_fraud:
-                    db.add(is_fraud)
-                    db.commit()
-                    db.refresh(is_fraud)
 
-                    return is_fraud
-            else:
-                pass
-    except Exception as error:
-        HTTPException(status_code=500, detail=str(error))
+    if data:
+        input = db.query(Inputs).filter_by(id=data.input_id).first()
+        if input is None:
+            raise HTTPException(status_code=404, detail=str("Input not found"))
+        else:
+            is_fraud = Frauds(**data.__dict__)
+            if is_fraud:
+                db.add(is_fraud)
+                db.commit()
+                db.refresh(is_fraud)
+
+                return is_fraud
 
 
 @router.get("/{input_id}", response_model=ResponseDatasetType, status_code=200)
