@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 
 class InputMobileType(BaseModel):
-    id: Optional[int] | None = None
+    id: Optional[int] = None
     category: str
     amt: int
     gender: str
