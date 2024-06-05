@@ -13,7 +13,7 @@ directory = "dataset/"
 filename = "new_fraud_dataset.csv"
 
 
-@router.get("/{filename}", status_code=200)
+@router.get("/file/new_fraud_dataset.csv", status_code=200)
 async def export_json():
     csv_path = os.path.join(directory, filename)
     try:
@@ -45,16 +45,16 @@ async def insert_in_dataset(
 
 
 @router.get("/input", response_model=List[InputMobileType], status_code=200)
-async def find_input(db: Session = Depends(get_db)) -> List[InputMobileType]:
+async def get_all_inputs(db: Session = Depends(get_db)) -> List[InputMobileType]:
     try:
-        with db:
-            inputs = db.query(Inputs).all()
-            if inputs:
-                return inputs
-            else:
-                raise HTTPException(status_code=404, detail="Input not found.")
+        inputs = db.query(Inputs).all()
+
+        if inputs:
+            return inputs
+        else:
+            raise HTTPException(status_code=404, detail="Inputs not found.")
     except Exception as error:
-        raise HTTPException(status_code=500, detail=str(error))
+        HTTPException(status_code=500, detail=str(error))
 
 
 @router.get("/input/{id}", response_model=InputMobileType, status_code=200)
