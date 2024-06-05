@@ -1,8 +1,9 @@
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel
 
 
 class InputMobileType(BaseModel):
+    id: Optional[int] | None = None
     category: str
     amt: int
     gender: str
