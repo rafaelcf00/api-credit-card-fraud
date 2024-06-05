@@ -12,7 +12,7 @@ router = APIRouter(tags=['Dataset'])
 directory = 'dataset/'
 filename = 'new_fraud_dataset.csv'
 
-@router.get('/{filename}', status_code=200)
+@router.get('/file/new_fraud_dataset.csv', status_code=200)
 async def export_json():
     csv_path = os.path.join(directory, filename)
     try:
@@ -41,7 +41,7 @@ async def insert_in_dataset(data: InputMobileType, db: Session = Depends(get_db)
         HTTPException(status_code=500, detail=str(error))
 
 @router.get('/input', response_model=List[InputMobileType], status_code=200)
-async def find_input(db: Session = Depends(get_db)) -> InputMobileType:
+async def find_input(db: Session = Depends(get_db)) -> List[InputMobileType]:
     try:
         inputs = db.query(Inputs).all()
         if len(inputs) != 0:
